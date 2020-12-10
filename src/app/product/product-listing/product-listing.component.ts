@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { products } from '../../products';
+import { ProductService } from '../shared/product.service';
+
 @Component({
   selector: 'app-product-listing',
   templateUrl: './product-listing.component.html',
@@ -8,11 +8,18 @@ import { products } from '../../products';
 })
 export class ProductListingComponent implements OnInit
 {
-  products;
-  constructor() { }
+  products: any;
+  constructor(private productService: ProductService) { }
   ngOnInit(): void
   {
-    this.products = products;
+    const productObservable = this.productService.getProducts();
+    productObservable.subscribe(
+      (data: any) =>
+      {
+        this.products = data;
+      },
+      (err) => { 'error'; }
+    )
   }
 
 }
