@@ -14,29 +14,27 @@ mongoose.connect(config.DB_URI, {
 }).then(
   () =>
   {
-    if (process.env.NODE_ENV !== 'production')
-    {
-      const fakeDb = new FakeDb();
-      // fakeDb.initDb;
-    }
+    // if (process.env.NODE_ENV !== 'production')
+    // {
+    const fakeDb = new FakeDb();
+    fakeDb.initDb;
+    // }
   }
 );
 
 app.use('/api/v1/products', productRoutes);
 
+// if (process.env.NODE_ENV === 'production')
+// {
+const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
+app.use(express.static(appPath))
+app.get("*", function (req, res)
+{
+  res.sendFile(path.resolve(appPath, 'index.html'))
+})
+// }
 app.listen(PORT, function ()
 {
-  console.log('I am running')
+  console.log(process.env.NODE_ENV)
 });
-
-if (process.env.NODE_ENV === 'production')
-{
-  const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
-  app.use(express.static(appPath))
-  app.get("*", function (req, res)
-  {
-    res.sendFile(path.resolve(appPath, 'index.html'))
-  })
-}
-
 
