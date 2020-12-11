@@ -7,7 +7,6 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || '3001';
-const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
 
 mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
@@ -20,7 +19,6 @@ mongoose.connect(config.DB_URI, {
       const fakeDb = new FakeDb();
       // fakeDb.initDb;
     }
-
   }
 );
 
@@ -31,10 +29,10 @@ app.listen(PORT, function ()
   console.log('I am running')
 });
 
-app.use(express.static(appPath))
-
 if (process.env.NODE_ENV === 'production')
 {
+  const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
+  app.use(express.static(appPath))
   app.get("*", function (req, res)
   {
     res.sendFile(path.resolve(appPath, 'index.html'))
