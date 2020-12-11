@@ -6,7 +6,7 @@ const productRoutes = require('./route/products');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || '3001';
+const PORT = '8000' || '3001';
 
 mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
@@ -14,27 +14,27 @@ mongoose.connect(config.DB_URI, {
 }).then(
   () =>
   {
-    // if (process.env.NODE_ENV !== 'production')
-    // {
-    const fakeDb = new FakeDb();
-    fakeDb.initDb;
-    // }
+    if (process.env.NODE_ENV !== 'production')
+    {
+      const fakeDb = new FakeDb();
+      // fakeDb.initDb;
+    }
   }
 );
 
 app.use('/api/v1/products', productRoutes);
-
-// if (process.env.NODE_ENV === 'production')
-// {
-const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
-app.use(express.static(appPath))
-app.get("*", function (req, res)
+if (process.env.NODE_ENV !== 'production')
 {
-  res.sendFile(path.resolve(appPath, 'index.html'))
-})
-// }
+  const appPath = path.join(__dirname, '..', 'dist', 'reservation-app')
+  app.use(express.static(appPath))
+  app.get("*", function (req, res)
+  {
+    res.sendFile(path.resolve(appPath, 'index.html'))
+  })
+}
 app.listen(PORT, function ()
 {
   console.log(process.env.NODE_ENV)
+  console.log(process.env.PORT)
 });
 
