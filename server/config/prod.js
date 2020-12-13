@@ -1,4 +1,4 @@
-const process = require('process');
+// const process = require('process');
 module.exports = {
   DB_URI =process.env.DB_URI
 }

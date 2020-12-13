@@ -33,8 +33,8 @@ if (process.env.NODE_ENV === 'production')
     res.sendFile(path.resolve(appPath, 'index.html'))
   })
 }
-app.listen(PORT, function ()
-{
-  console.log('runnning')
-});
+// app.listen(PORT, function ()
+// {
+//   console.log('runnning')
+// });
 
