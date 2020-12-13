@@ -4,7 +4,7 @@ const config = require('./config');
 const FakeDb = require('./fake-db');
 const productRoutes = require('./route/products');
 const path = require('path');
-const process = require('process');
+// const process = require('process');
 
 const app = express();
 const PORT = process.env.PORT || '3001';
