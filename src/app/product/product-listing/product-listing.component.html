@@ -4,10 +4,10 @@
     <!-- <div class="filter"></div> -->
   </div>
   <div class="section profile-content">
-    <div class="container">
-      <br>
+    <br>
+    <ng-container>
       <div class="row">
-        <div *ngFor="let product of products;" class="col-3">
+        <div *ngFor="let product of products;" class="col-sm">
           <a [routerLink]="[product._id]">
             <div class="card">
               <img src="{{product.coverImage}}" class="card-image-top" alt="...">
@@ -19,6 +19,6 @@
           </a>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>
