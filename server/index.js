@@ -7,8 +7,6 @@ const path = require('path');
 // const process = require('process');
 
 const app = express();
-// const PORT = process.env.PORT || '3001';
-const PORT = process.env.PORT || '3001';
 mongoose.connect(config.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,8 +31,9 @@ if (process.env.NODE_ENV === 'production')
     res.sendFile(path.resolve(appPath, 'index.html'))
   })
 }
-// app.listen(PORT, function ()
-// {
-//   console.log('runnning')
-// });
+const PORT = process.env.PORT || '3001';
+app.listen(PORT, function ()
+{
+  console.log('runnning')
+});
 
