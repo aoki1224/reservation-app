@@ -19,7 +19,7 @@ export class ProductListingComponent implements OnInit
         this.products = data;
       },
       (err) => { 'error'; }
-    )
+    );
   }
 
 }
